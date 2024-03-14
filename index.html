@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>How Many Wounds</title>
 </head>
@@ -16,22 +19,58 @@
     </nav>
     <main>
         <form>
-            <fieldset>
+            <fieldset class="weapon-field">
                 <legend>Weapon</legend>
-                <input type="number" name="nb-attacks" id="nb-attacks">
-                <input type="number" name="ct/cc" id="ct/cc">
-                <input type="number" name="strengh" id="strengh">
-                <input type="number" name="ap" id="ap">
-                <input type="number" name="damage" id="damage">
+                <div>
+                    <label for="nb-attacks">A</label>
+                    <br>
+                    <input type="number" name="nb-attacks" id="nb-attacks" min="0" placeholder="2">
+                </div>
+                <div>
+                    <label for="cc-ct">CC/CT</label>
+                    <br>
+                    <input type="number" name="cc-ct" id="cc-ct" min="2" max="6" placeholder="3"> +
+                </div>
+                <div>
+                    <label for="strengh">S</label>
+                    <br>
+                    <input type="number" name="strengh" id="strengh" min="0" placeholder="4">
+                </div>
+                <div>
+                    <label for="ap">AP</label>
+                    <br>
+                    - <input type="number" name="ap" id="ap" min="0" placeholder="1">
+                </div>
+                <div>
+                    <label for="damage">D</label>
+                    <br>
+                    <input type="number" name="damage" id="damage" min="0" placeholder="1">
+                </div>
             </fieldset>
             <fieldset>
                 <legend>Target</legend>
-                <input type="number" name="toughness" id="toughness">
-                <input type="number" name="save" id="save">
-                <input type="checkbox" name="has-invul" id="has-invul">
-                <input type="number" name="invul" id="invul">
+                <div>
+                    <label for="toughness">T</label>
+                    <br>
+                    <input type="number" name="toughness" id="toughness" min="1" placeholder="4">
+                </div>
+                <div>
+                    <label for="save">S</label>
+                    <br>
+                    <input type="number" name="save" id="save" min="2" placeholder="3">+
+                </div>
+                <div>
+                    <br>
+                    <input class="invul-cb" type="checkbox" name="has-invul" id="has-invul">
+                </div>
+                <div>
+                    <label for="has-invul">Invul</label>
+                    <br>
+                    <input type="number" name="invul" id="invul" min="2" max="6" placeholder="4" disabled>+
+                </div>
             </fieldset>
         </form>
+        <button>Calculate</button>
     </main>
     <footer>
 
