@@ -1,5 +1,6 @@
-import { addCheckboxListener, addCalculateButtonListener } from "./listeners.js";
+import { addCheckboxListener, addCalculateButtonListener, addRandomDamageListener } from "./listeners.js";
 
 
 addCheckboxListener();
 addCalculateButtonListener();
+addRandomDamageListener();

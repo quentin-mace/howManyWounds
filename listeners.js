@@ -18,12 +18,13 @@ export function addCheckboxListener() {
 export function addCalculateButtonListener() {
     const calculateButton = document.querySelector(".caclulate-btn");
     calculateButton.addEventListener("click", ()=>{
+        const averageDamage = Number(document.getElementById("num-rnd-dmg").value)*Number(document.getElementById("rand-dmg").value)+Number(document.getElementById("damage").value);
         const weapon = {
             attack: document.getElementById("nb-attacks").value,
             cc_ct: document.getElementById("cc-ct").value,
             strengh: document.getElementById("strengh").value,
             ap: document.getElementById("ap").value,
-            damage: document.getElementById("damage").value
+            damage: averageDamage
         };
         const invul = document.getElementById("invul");
         if (invul.disabled) {
@@ -36,5 +37,20 @@ export function addCalculateButtonListener() {
         };
         const outputDamage = howManyWounds(weapon, target);
         displayOutput(outputDamage);
+    });
+}
+
+//Function to activate/Deactivate the random damage selector
+export function addRandomDamageListener() {
+    const numberOfDiceDmg = document.getElementById("num-rnd-dmg");
+    numberOfDiceDmg.addEventListener("change", ()=> {
+        const diceSelector = document.getElementById("rand-dmg");
+        console.log(numberOfDiceDmg.value);
+        if (Number(numberOfDiceDmg.value) !== 0){
+            diceSelector.disabled = false;
+        } else {
+            diceSelector.disabled = true;
+        }
+        console.log(diceSelector.disabled);
     });
 }
