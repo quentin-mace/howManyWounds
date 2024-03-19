@@ -7,10 +7,10 @@ In this app, you input the stats of the weapont you wish to use and the stats of
 
 __Implementations to make :__
 - [x] We cannot enter a random number of attacks/damage
+- [ ] Needs to implement feel no pain
 - [ ] Needs to implement special rules (sus hit, let hits, torrent, dev wounds, etc...)
     - [ ] Sustained Hits
     - [ ] Lethal Hits
     - [ ] Torrent
     - [ ] Devastating Wounds
-- [ ] Needs to implement feel no pain
 - [ ] Using BS API to import weapon profiles/target profiles
