@@ -10,7 +10,7 @@ __Implementations to make :__
 - [x] Needs to implement feel no pain
 - [ ] Needs to implement special rules (sus hit, let hits, torrent, dev wounds, etc...)
     - [x] Sustained Hits
-    - [ ] Lethal Hits
+    - [x] Lethal Hits
+    - [x] Devastating Wounds
     - [ ] Torrent
-    - [ ] Devastating Wounds
 - [ ] Using BS API to import weapon profiles/target profiles

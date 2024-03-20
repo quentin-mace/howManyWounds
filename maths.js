@@ -29,6 +29,7 @@ export function howManyWounds(weapon, target){
     //Roll to hit
     dices = dices*diceProbability[weapon.cc_ct];
     console.log(Number(dices).toFixed(2) + " Hits");
+    //Store the lethal hits and remove them from the calculations
     let lethalHits = 0;
     if(weapon.special_rules.lethal_hits){
         lethalHits = weapon.attack/6;
@@ -43,15 +44,25 @@ export function howManyWounds(weapon, target){
         dices = dices+sustainedDice;
         console.log(Number(dices).toFixed(2) + " dice to roll with sustained");
     }
+    //Calculate how many dev wounds would score
+    let devWounds = 0;
+    if(weapon.special_rules.dev_wounds){
+        devWounds = dices/6;
+    }
     //Roll to wound
     dices = dices*diceProbability[woundRoll(weapon.strengh, target.toughness)];
+    //Remove the devastating wounds from the calculations
+    console.log(Number(dices).toFixed(2) + " Wounds scored");
+    if(weapon.special_rules.dev_wounds){
+        console.log(Number(devWounds).toFixed(2) + " of them are Devastating");
+        dices = dices-devWounds;
+        console.log(Number(dices).toFixed(2) + " left to roll");
+    }
+    //Add back the lethal hits if needed
     if(weapon.special_rules.lethal_hits){
-        console.log(Number(dices).toFixed(2) + " wounds scored");
         dices = dices+lethalHits;
         console.log("Re adding the " + lethalHits.toFixed(2) + " lethal hits");
         console.log(Number(dices).toFixed(2) + " total wounds scored");
-    } else {
-        console.log(Number(dices).toFixed(2) + " Wounds scored");
     }
     //Roll save
     let save = Number(target.save) + Number(weapon.ap);
@@ -64,8 +75,16 @@ export function howManyWounds(weapon, target){
     if(save <= 6){
         dices = dices - dices*diceProbability[save];
     }
-    console.log(dices.toFixed(2) + " Scored");
+    console.log(Number(dices).toFixed(2) + " Scored");
+    //Add back the devastating wounds
+    if(weapon.special_rules.dev_wounds){
+        console.log(Number(devWounds).toFixed(2) + " dev wounds re-added");
+        dices = dices + devWounds;
+        console.log(Number(dices).toFixed(2) + " total dices scored");
+    }
+    //Calculation of the final damage
     let damage = dices*weapon.damage;
+    //Utilisation du FNP si besoin
     if (target.fnp){
         console.log(Number(damage).toFixed(2) + " Damages before fnp");
         damage = damage - damage*diceProbability[target.fnp];
