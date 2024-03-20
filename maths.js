@@ -29,6 +29,13 @@ export function howManyWounds(weapon, target){
     //Roll to hit
     dices = dices*diceProbability[weapon.cc_ct];
     console.log(dices + " Hits");
+    //Add sustained hits
+    if (weapon.special_rules.sustained_hits){
+        let sustainedDice = 0;
+        sustainedDice = (weapon.attack/6)*weapon.special_rules.sushits_value;
+        dices = dices+sustainedDice;
+        console.log(dices + "dice to roll with sustained");
+    }
     //Roll to wound
     dices = dices*diceProbability[woundRoll(weapon.strengh, target.toughness)];
     console.log(dices + " Wounds");
@@ -45,7 +52,7 @@ export function howManyWounds(weapon, target){
     }
     console.log(dices + " Scored");
     let damage = dices*weapon.damage;
-    if (target.fnp !== null){
+    if (target.fnp){
         console.log(damage + " Damages before fnp");
         damage = damage - damage*diceProbability[target.fnp];
         console.log(damage + " Damages after fnp");

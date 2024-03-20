@@ -3,5 +3,6 @@ import { addCheckboxListener, addCalculateButtonListener, addRandomDamageListene
 
 addCheckboxListener(".invul-cb",".invul-input");
 addCheckboxListener(".fnp-cb",".fnp-input");
+addCheckboxListener(".has-sushits",".sushits-input");
 addCalculateButtonListener();
 addRandomDamageListener();

@@ -5,6 +5,7 @@ import { displayOutput } from "./domManip.js";
 export function addCheckboxListener(checkboxClass, inputClass) {
     const checkbox = document.querySelector(checkboxClass);
     checkbox.addEventListener("change", ()=>{
+        //console.log(checkbox.name + " : " + checkbox.checked);
         const input = document.querySelector(inputClass);
         if(input.disabled){
             input.disabled = false;
@@ -18,14 +19,22 @@ export function addCheckboxListener(checkboxClass, inputClass) {
 export function addCalculateButtonListener() {
     const calculateButton = document.querySelector(".caclulate-btn");
     calculateButton.addEventListener("click", ()=>{
+        // Creation de l'objet "Special Rules"
+        const specialRules = {
+            sustained_hits: document.getElementById("has-sushits").checked,
+            sushits_value: document.getElementById("sushits-input").value
+        };
+        //Creation de l'objet "Weapon"
         const averageDamage = Number(document.getElementById("num-rnd-dmg").value)*Number(document.getElementById("rand-dmg").value)+Number(document.getElementById("damage").value);
         const weapon = {
             attack: document.getElementById("nb-attacks").value,
             cc_ct: document.getElementById("cc-ct").value,
             strengh: document.getElementById("strengh").value,
             ap: document.getElementById("ap").value,
-            damage: averageDamage
+            damage: averageDamage,
+            special_rules: specialRules
         };
+        // Création de l'objet "Target"
         const invul = document.getElementById("invul");
         if (invul.disabled) {
             invul.value = null;
