@@ -2,14 +2,14 @@ import { howManyWounds } from "./maths.js";
 import { displayOutput } from "./domManip.js";
 
 //Function to activate of deactivate the invul field with the checkbox
-export function addCheckboxListener() {
-    const invulCheckbox = document.querySelector(".invul-cb");
-    invulCheckbox.addEventListener("change", ()=>{
-        const invulInput = document.querySelector(".invul-input");
-        if(invulInput.disabled){
-            invulInput.disabled = false;
+export function addCheckboxListener(checkboxClass, inputClass) {
+    const checkbox = document.querySelector(checkboxClass);
+    checkbox.addEventListener("change", ()=>{
+        const input = document.querySelector(inputClass);
+        if(input.disabled){
+            input.disabled = false;
         } else {
-            invulInput.disabled = true;
+            input.disabled = true;
         }
     });
 }
@@ -30,10 +30,15 @@ export function addCalculateButtonListener() {
         if (invul.disabled) {
             invul.value = null;
         }
+        const fnp = document.getElementById("fnp");
+        if (fnp.disabled) {
+            fnp.value = null;
+        }
         const target = {
             toughness: document.getElementById("toughness").value,
             save: document.getElementById("save").value,
-            invul: invul.value
+            invul: invul.value,
+            fnp: fnp.value
         };
         const outputDamage = howManyWounds(weapon, target);
         displayOutput(outputDamage);

@@ -35,6 +35,7 @@ export function howManyWounds(weapon, target){
     //Roll save
     let save = Number(target.save) + Number(weapon.ap);
     console.log("Modified Save : " + save);
+    //Do we use the invul
     console.log("Invul : " + target.invul);
     if (target.invul && target.invul < save) {
         save = target.invul;
@@ -44,6 +45,12 @@ export function howManyWounds(weapon, target){
     }
     console.log(dices + " Scored");
     let damage = dices*weapon.damage;
-    console.log(damage + " Damages");
+    if (target.fnp !== null){
+        console.log(damage + " Damages before fnp");
+        damage = damage - damage*diceProbability[target.fnp];
+        console.log(damage + " Damages after fnp");
+    } else {
+        console.log(damage + " Damages");
+    }
     return damage;
 }
