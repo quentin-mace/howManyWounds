@@ -25,20 +25,34 @@ export function howManyWounds(weapon, target){
     let dices = 0;
     //Number of attacks
     dices = weapon.attack;
-    console.log(dices + " Attaks");
+    console.log(Number(dices).toFixed(2) + " Attaks");
     //Roll to hit
     dices = dices*diceProbability[weapon.cc_ct];
-    console.log(dices + " Hits");
+    console.log(Number(dices).toFixed(2) + " Hits");
+    let lethalHits = 0;
+    if(weapon.special_rules.lethal_hits){
+        lethalHits = weapon.attack/6;
+        dices = dices - lethalHits;
+        console.log(Number(lethalHits).toFixed(2) + " dice are lethal");
+        console.log(Number(dices).toFixed(2) + " dice to roll for wounding");
+    }
     //Add sustained hits
     if (weapon.special_rules.sustained_hits){
         let sustainedDice = 0;
         sustainedDice = (weapon.attack/6)*weapon.special_rules.sushits_value;
         dices = dices+sustainedDice;
-        console.log(dices + "dice to roll with sustained");
+        console.log(Number(dices).toFixed(2) + " dice to roll with sustained");
     }
     //Roll to wound
     dices = dices*diceProbability[woundRoll(weapon.strengh, target.toughness)];
-    console.log(dices + " Wounds");
+    if(weapon.special_rules.lethal_hits){
+        console.log(Number(dices).toFixed(2) + " wounds scored");
+        dices = dices+lethalHits;
+        console.log("Re adding the " + lethalHits.toFixed(2) + " lethal hits");
+        console.log(Number(dices).toFixed(2) + " total wounds scored");
+    } else {
+        console.log(Number(dices).toFixed(2) + " Wounds scored");
+    }
     //Roll save
     let save = Number(target.save) + Number(weapon.ap);
     console.log("Modified Save : " + save);
@@ -50,14 +64,14 @@ export function howManyWounds(weapon, target){
     if(save <= 6){
         dices = dices - dices*diceProbability[save];
     }
-    console.log(dices + " Scored");
+    console.log(dices.toFixed(2) + " Scored");
     let damage = dices*weapon.damage;
     if (target.fnp){
-        console.log(damage + " Damages before fnp");
+        console.log(Number(damage).toFixed(2) + " Damages before fnp");
         damage = damage - damage*diceProbability[target.fnp];
-        console.log(damage + " Damages after fnp");
+        console.log(Number(damage).toFixed(2) + " Damages after fnp");
     } else {
-        console.log(damage + " Damages");
+        console.log(Number(damage).toFixed(2) + " Damages");
     }
     return damage;
 }

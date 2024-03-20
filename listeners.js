@@ -22,7 +22,8 @@ export function addCalculateButtonListener() {
         // Creation de l'objet "Special Rules"
         const specialRules = {
             sustained_hits: document.getElementById("has-sushits").checked,
-            sushits_value: document.getElementById("sushits-input").value
+            sushits_value: document.getElementById("sushits-input").value,
+            lethal_hits: document.getElementById("lethits").checked
         };
         //Creation de l'objet "Weapon"
         const averageDamage = Number(document.getElementById("num-rnd-dmg").value)*Number(document.getElementById("rand-dmg").value)+Number(document.getElementById("damage").value);

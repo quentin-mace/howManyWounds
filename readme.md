@@ -9,7 +9,7 @@ __Implementations to make :__
 - [x] We cannot enter a random number of attacks/damage
 - [x] Needs to implement feel no pain
 - [ ] Needs to implement special rules (sus hit, let hits, torrent, dev wounds, etc...)
-    - [ ] Sustained Hits
+    - [x] Sustained Hits
     - [ ] Lethal Hits
     - [ ] Torrent
     - [ ] Devastating Wounds
