@@ -12,5 +12,8 @@ __Implementations to make :__
     - [x] Sustained Hits
     - [x] Lethal Hits
     - [x] Devastating Wounds
-    - [ ] Torrent
+    - [x] Torrent
+    - [x] Twin Linked
+- [ ] Add PV and number of kills
+- [ ] Refactoring
 - [ ] Using BS API to import weapon profiles/target profiles

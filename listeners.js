@@ -24,7 +24,9 @@ export function addCalculateButtonListener() {
             sustained_hits: document.getElementById("has-sushits").checked,
             sushits_value: document.getElementById("sushits-input").value,
             lethal_hits: document.getElementById("lethits").checked,
-            dev_wounds: document.getElementById("devwounds").checked
+            dev_wounds: document.getElementById("devwounds").checked,
+            torrent: document.getElementById("torrent").checked,
+            twin_linked: document.getElementById("twin-linked").checked
         };
         //Creation de l'objet "Weapon"
         const averageDamage = Number(document.getElementById("num-rnd-dmg").value)*Number(document.getElementById("rand-dmg").value)+Number(document.getElementById("damage").value);

@@ -26,23 +26,28 @@ export function howManyWounds(weapon, target){
     //Number of attacks
     dices = weapon.attack;
     console.log(Number(dices).toFixed(2) + " Attaks");
-    //Roll to hit
-    dices = dices*diceProbability[weapon.cc_ct];
-    console.log(Number(dices).toFixed(2) + " Hits");
-    //Store the lethal hits and remove them from the calculations
-    let lethalHits = 0;
-    if(weapon.special_rules.lethal_hits){
-        lethalHits = weapon.attack/6;
-        dices = dices - lethalHits;
-        console.log(Number(lethalHits).toFixed(2) + " dice are lethal");
-        console.log(Number(dices).toFixed(2) + " dice to roll for wounding");
-    }
-    //Add sustained hits
-    if (weapon.special_rules.sustained_hits){
-        let sustainedDice = 0;
-        sustainedDice = (weapon.attack/6)*weapon.special_rules.sushits_value;
-        dices = dices+sustainedDice;
-        console.log(Number(dices).toFixed(2) + " dice to roll with sustained");
+    //Block for torrent
+    if(weapon.special_rules.torrent){
+        console.log("Auto Hit");
+    } else {
+        //Roll to hit
+        dices = dices*diceProbability[weapon.cc_ct];
+        console.log(Number(dices).toFixed(2) + " Hits");
+        //Store the lethal hits and remove them from the calculations
+        let lethalHits = 0;
+        if(weapon.special_rules.lethal_hits){
+            lethalHits = weapon.attack/6;
+            dices = dices - lethalHits;
+            console.log(Number(lethalHits).toFixed(2) + " dice are lethal");
+            console.log(Number(dices).toFixed(2) + " dice to roll for wounding");
+        }
+        //Add sustained hits
+        if (weapon.special_rules.sustained_hits){
+            let sustainedDice = 0;
+            sustainedDice = (weapon.attack/6)*weapon.special_rules.sushits_value;
+            dices = dices+sustainedDice;
+            console.log(Number(dices).toFixed(2) + " dice to roll with sustained");
+        }
     }
     //Calculate how many dev wounds would score
     let devWounds = 0;
@@ -50,9 +55,25 @@ export function howManyWounds(weapon, target){
         devWounds = dices/6;
     }
     //Roll to wound
+    //Variable to use if twin linked
+    let reroll = dices - dices*diceProbability[woundRoll(weapon.strengh, target.toughness)];
+    let devWoundsReroll = 0;
     dices = dices*diceProbability[woundRoll(weapon.strengh, target.toughness)];
-    //Remove the devastating wounds from the calculations
     console.log(Number(dices).toFixed(2) + " Wounds scored");
+    //Reroll
+    if(weapon.special_rules.twin_linked){
+        //Calculate how many dev wounds would score on the reroll
+        console.log(Number(reroll).toFixed(2) + " left to reroll");
+        if(weapon.special_rules.dev_wounds){
+            devWoundsReroll = reroll/6;
+        }
+        reroll = reroll*diceProbability[woundRoll(weapon.strengh, target.toughness)];
+        console.log(Number(reroll).toFixed(2) + " more Wounds scored");
+        dices = dices+reroll;
+        console.log(Number(dices).toFixed(2) + " total Wounds scored");
+        devWounds = devWounds + devWoundsReroll;
+    }
+    //Remove the devastating wounds from the calculations
     if(weapon.special_rules.dev_wounds){
         console.log(Number(devWounds).toFixed(2) + " of them are Devastating");
         dices = dices-devWounds;
