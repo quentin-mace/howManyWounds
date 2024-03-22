@@ -30,8 +30,9 @@ export function addCalculateButtonListener() {
         };
         //Creation de l'objet "Weapon"
         const averageDamage = Number(document.getElementById("num-rnd-dmg").value)*Number(document.getElementById("rand-dmg").value)+Number(document.getElementById("damage").value);
+        const averageAttacks = Number(document.getElementById("num-rnd-atk").value)*Number(document.getElementById("rand-atk").value)+Number(document.getElementById("nb-attacks").value);
         const weapon = {
-            attack: document.getElementById("nb-attacks").value,
+            attack: averageAttacks,
             cc_ct: document.getElementById("cc-ct").value,
             strengh: document.getElementById("strengh").value,
             ap: document.getElementById("ap").value,
@@ -50,6 +51,7 @@ export function addCalculateButtonListener() {
         const target = {
             toughness: document.getElementById("toughness").value,
             save: document.getElementById("save").value,
+            pv: document.getElementById("pv").value,
             invul: invul.value,
             fnp: fnp.value
         };
@@ -59,10 +61,10 @@ export function addCalculateButtonListener() {
 }
 
 //Function to activate/Deactivate the random damage selector
-export function addRandomDamageListener() {
-    const numberOfDiceDmg = document.getElementById("num-rnd-dmg");
+export function addRandomDiceListener(numberOfRandom, randomDice) {
+    const numberOfDiceDmg = document.getElementById(numberOfRandom);
     numberOfDiceDmg.addEventListener("change", ()=> {
-        const diceSelector = document.getElementById("rand-dmg");
+        const diceSelector = document.getElementById(randomDice);
         console.log(numberOfDiceDmg.value);
         if (Number(numberOfDiceDmg.value) !== 0){
             diceSelector.disabled = false;

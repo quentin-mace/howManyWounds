@@ -25,6 +25,12 @@
                 <div>
                     <label for="nb-attacks">A</label>
                     <br>
+                    <input type="number" name="num-rnd-atk" id="num-rnd-atk" min="0" placeholder="0">
+                    <select name="rand-atk" id="rand-atk" disabled>
+                        <option value="2">D3</option>
+                        <option value="3.5">D6</option>
+                    </select>
+                    +
                     <input type="number" name="nb-attacks" id="nb-attacks" min="0" placeholder="2">
                 </div>
                 <div>
@@ -94,6 +100,11 @@
                     <label for="save">Sv</label>
                     <br>
                     <input type="number" name="save" id="save" min="2" placeholder="3">+
+                </div>
+                <div>
+                    <label for="pv">HP</label>
+                    <br>
+                    <input type="number" name="pv" id="pv" min="1" placeholder="2">
                 </div>
                 <div>
                     <label for="has-invul">Invul</label>
