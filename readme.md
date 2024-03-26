@@ -20,8 +20,9 @@ __Implementations to make :__
     - [x] Hit roll
     - [x] Wound Roll
     - [x] Save Roll
-    - [ ] Fnp + Number of kill
+    - [x] Fnp + Number of kill
 - [ ] Add PV and number of kills
     - [x] Add a PV Stat
-    - [ ] Change the calculation to output number of hits + number of kills
+    - [x] Change the calculation to output number of hits + number of kills
+    - [ ] Fix bug
 - [ ] Using BS API to import weapon profiles/target profiles

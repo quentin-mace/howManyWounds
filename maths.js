@@ -34,7 +34,7 @@ function hitRoll(attacks, cc_ct, rules) {
         console.log("Auto Hits");
     } else {
         hits.basic = attacks*diceProbability[cc_ct];
-        console.log(Number(hits).toFixed(2) + " Hits");
+        console.log(Number(hits.basic).toFixed(2) + " Hits");
         if (rules.sustained_hits) {
             sushits = (attacks/6)*rules.sushits_value;
             hits.basic += sushits;
@@ -99,6 +99,23 @@ function saveRoll(wounds, target, ap, rules) {
     return scored;
 }
 
+// Formule avec FNP :  Blessures non sauvegardées x (1 / (ceiling(PV/DMG)))x(1-%FNP)
+function howManyKills(wounds, weapon, target) {
+    let killcount = {
+        totalDamage: wounds*weapon.damage,
+        kills: 0,
+        remainingDmg:0
+    }
+    if (target.fnp){
+        killcount.kills = wounds*(1/(Math.ceil(target.pv/weapon.damage))*(1-diceProbability[target.fnp]));
+    } else {
+        killcount.kills = Math.floor(killcount.totalDamage/target.pv);
+    }
+    let killingDamage = killcount.kills * target.pv;
+    killcount.remainingDmg = killcount.totalDamage-killingDamage;
+    return killcount;
+}
+
 export function howManyWounds(weapon, target){
     //Initial number of attacks
     let attaks = weapon.attack;
@@ -114,14 +131,7 @@ export function howManyWounds(weapon, target){
     let scored = saveRoll(wounds, target, weapon.ap, weapon.special_rules);
 
     //Calculation of the final damage
-    let damage = scored*weapon.damage;
-    //Utilisation du FNP si besoin
-    if (target.fnp){
-        console.log(Number(damage).toFixed(2) + " Damages before fnp");
-        damage = damage - damage*diceProbability[target.fnp];
-        console.log(Number(damage).toFixed(2) + " Damages after fnp");
-    } else {
-        console.log(Number(damage).toFixed(2) + " Damages");
-    }
+    let damage = howManyKills(scored, weapon, target);
+
     return damage;
 }
