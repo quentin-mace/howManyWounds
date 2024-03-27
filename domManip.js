@@ -11,3 +11,11 @@ export function displayOutput(killcount){
     outputDiv.innerHTML = ``;
     outputDiv.appendChild(outputMessage);
 }
+
+export function displayError(errorMessage){
+    const outputDiv = document.querySelector(".result");
+    const outputMessage = document.createElement("p");
+    outputMessage.innerHTML = errorMessage;
+    outputDiv.innerHTML = ``;
+    outputDiv.appendChild(outputMessage);
+}

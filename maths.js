@@ -36,7 +36,7 @@ function hitRoll(attacks, cc_ct, rules) {
         hits.basic = attacks*diceProbability[cc_ct];
         console.log(Number(hits.basic).toFixed(2) + " Hits");
         if (rules.sustained_hits) {
-            sushits = (attacks/6)*rules.sushits_value;
+            let sushits = (attacks/6)*rules.sushits_value;
             hits.basic += sushits;
             console.log(Number(sushits).toFixed(2) + " of them are sustained");
             console.log(Number(hits.basic).toFixed(2) + " total hits");
@@ -81,7 +81,7 @@ function woundRoll(hits, strengh, toughness, rules){
 
 function saveRoll(wounds, target, ap, rules) {
     let scored = wounds.basic;
-    let save = Number(target.save) + ap;
+    let save = Number(target.save) + Number(ap);
     console.log("Modified Save : " + save + "+");
     if (target.invul && target.invul < save) {
         console.log("The Invul will be used : " + target.invul + "+");
@@ -90,7 +90,7 @@ function saveRoll(wounds, target, ap, rules) {
     if(save <= 6){
         scored -= wounds.basic*diceProbability[save];
     }
-    console.log(Number(wounds.basic).toFixed(2) + " attacks Scored");
+    console.log(Number(scored).toFixed(2) + " attacks Scored");
     if(rules.dev_wounds){
         console.log(Number(wounds.devastating).toFixed(2) + " dev wounds re-added");
         wounds.basic = wounds.basic + wounds.devastating;
@@ -102,14 +102,17 @@ function saveRoll(wounds, target, ap, rules) {
 // Formule avec FNP :  Blessures non sauvegardées x (1 / (ceiling(PV/DMG)))x(1-%FNP)
 function howManyKills(wounds, weapon, target) {
     let killcount = {
-        totalDamage: wounds*weapon.damage,
+        totalDamage: Math.round(wounds)*weapon.damage,
         kills: 0,
         remainingDmg:0
     }
     if (target.fnp){
+        console.log("The target has FNP");
         killcount.kills = wounds*(1/(Math.ceil(target.pv/weapon.damage))*(1-diceProbability[target.fnp]));
+        console.log("The attack kills " + Number(killcount.kills) + " models");
     } else {
         killcount.kills = Math.floor(killcount.totalDamage/target.pv);
+        console.log("The attack kills " + Number(killcount.kills) + " models");
     }
     let killingDamage = killcount.kills * target.pv;
     killcount.remainingDmg = killcount.totalDamage-killingDamage;

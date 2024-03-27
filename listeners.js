@@ -1,5 +1,5 @@
 import { howManyWounds } from "./maths.js";
-import { displayOutput } from "./domManip.js";
+import { displayError, displayOutput } from "./domManip.js";
 import { readWeapon, readTarget } from "./docReader.js";
 
 //Function to activate of deactivate the invul field with the checkbox
@@ -20,10 +20,14 @@ export function addCheckboxListener(checkboxClass, inputClass) {
 export function addCalculateButtonListener() {
     const calculateButton = document.querySelector(".caclulate-btn");
     calculateButton.addEventListener("click", ()=>{
-        const weapon = readWeapon();
-        const target = readTarget();
-        const outputDamage = howManyWounds(weapon, target);
-        displayOutput(outputDamage);
+        try{
+            const weapon = readWeapon();
+            const target = readTarget();
+            const outputDamage = howManyWounds(weapon, target);
+            displayOutput(outputDamage);
+        } catch(error) {
+            displayError(error.message);
+        }
     });
 }
 

@@ -15,14 +15,16 @@ __Implementations to make :__
     - [x] Torrent
     - [x] Twin Linked
 - [x] Add Random number of attacks
-- [ ] Refactoring
+- [x] Refactoring
     - [x] Doc reading
     - [x] Hit roll
     - [x] Wound Roll
     - [x] Save Roll
     - [x] Fnp + Number of kill
-- [ ] Add PV and number of kills
+- [x] Add PV and number of kills
     - [x] Add a PV Stat
     - [x] Change the calculation to output number of hits + number of kills
-    - [ ] Fix bug
+    - [x] Fix bug
+- [x] Borner valeurs
+- [ ] Clear values on unchecking
 - [ ] Using BS API to import weapon profiles/target profiles
