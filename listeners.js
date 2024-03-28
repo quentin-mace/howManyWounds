@@ -12,6 +12,7 @@ export function addCheckboxListener(checkboxClass, inputClass) {
             input.disabled = false;
         } else {
             input.disabled = true;
+            input.value = null;
         }
     });
 }

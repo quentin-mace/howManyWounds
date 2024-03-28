@@ -26,5 +26,5 @@ __Implementations to make :__
     - [x] Change the calculation to output number of hits + number of kills
     - [x] Fix bug
 - [x] Borner valeurs
-- [ ] Clear values on unchecking
-- [ ] Using BS API to import weapon profiles/target profiles
+- [x] Clear values on unchecking
+- [ ] Using BS data to import weapon profiles/target profiles
